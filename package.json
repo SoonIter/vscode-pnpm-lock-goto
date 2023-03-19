@@ -20,7 +20,7 @@
     "Other"
   ],
   "main": "./dist/index.js",
-  "icon": "assets/pnpm-lock.png",
+  "icon": "./assets/pnpm-lock.png",
   "files": [
     "dist"
   ],
@@ -31,35 +31,36 @@
     "onLanguage:yaml"
   ],
   "scripts": {
+    "prepare": "simple-git-hooks",
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "vscode:prepublish": "nr build",
     "publish": "vsce publish --no-dependencies",
     "pack": "vsce package --no-dependencies",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp && nr publish",
-    "prepare": "simple-git-hooks"
+    "release": "bumpp && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.25.2",
-    "@antfu/ni": "^0.17.2",
+    "@antfu/eslint-config": "^0.37.0",
+    "@antfu/ni": "^0.20.0",
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
-    "@types/node": "^18.6.4",
-    "@types/vscode": "^1.69.0",
-    "bumpp": "^8.2.1",
-    "eslint": "^8.21.0",
+    "@types/node": "^18.15.3",
+    "@types/vscode": "^1.76.0",
+    "bumpp": "^9.0.0",
+    "eslint": "^8.36.0",
     "esno": "^0.16.3",
     "lint-staged": "^13.2.0",
-    "pnpm": "^7.8.0",
-    "rimraf": "^3.0.2",
+    "pnpm": "^7.30.0",
+    "rimraf": "^4.4.0",
     "simple-git-hooks": "^2.8.1",
-    "tsup": "^6.2.1",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.4",
-    "vitest": "^0.21.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.0",
+    "vitest": "^0.29.3",
     "vsce": "^2.10.0"
   },
   "simple-git-hooks": {
