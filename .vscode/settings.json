@@ -19,5 +19,7 @@
   ],
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  },
+  "i18n-ally.localesPaths": [],
+  "commentTranslate.hover.enabled": false
 }

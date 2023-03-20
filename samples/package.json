@@ -1,3 +1,5 @@
 {
-  "hello_hello": "123"
+  "name": "samples",
+  "version": "0.0.0",
+  "private": true
 }

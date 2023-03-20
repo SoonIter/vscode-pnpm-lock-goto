@@ -1,0 +1,48 @@
+name: Release-routine
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  release:
+    name: Release-routine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Set node16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - id: get_date 
+        run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
+
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        with:
+          version: npx changeset version
+          title: release-routine-${{ steps.get_date.outputs.DATE }}
+          commit: release-auto-generated
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

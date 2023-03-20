@@ -2,7 +2,7 @@
   "publisher": "sooniter",
   "name": "pnpm-lock-goto",
   "displayName": "pnpm-lock-goto",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@7.28.0",
   "description": "",
@@ -41,16 +41,17 @@
     "pack": "vsce package --no-dependencies",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp && nr publish"
+    "release": "changeset version && nr publish",
+    "changeset": "changeset"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "@antfu/eslint-config": "^0.37.0",
     "@antfu/ni": "^0.20.0",
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@types/node": "^18.15.3",
     "@types/vscode": "^1.69.0",
-    "bumpp": "^9.0.0",
     "eslint": "^8.36.0",
     "esno": "^0.16.3",
     "lint-staged": "^13.2.0",

@@ -1,22 +1,48 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  pull_request:
+    branches: ['changeset-release/*']
+    paths:
+      - '**/CHANGELOG.md'
+    types:
+      - closed
+    
 
 jobs:
-  release:
+  if_release_routine_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    - run: |
+        echo "The PR from ${{ github.head_ref }} was merged"
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
-      - run: npx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+
+    - name: Set node16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+        cache: pnpm
+
+    - name: Setup-ni
+      run: npm i -g @antfu/ni
+
+    - name: Install
+      run: |
+        pnpm install
+        pnpm run publish
+      env:
+        VSCE_PAT: ${{ secrets.AZURE_TOKEN }}
+
+    - name: Create Github Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ./*.vsix
+        body_path: CHANGELOG.md
