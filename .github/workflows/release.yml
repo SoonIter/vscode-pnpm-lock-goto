@@ -3,7 +3,9 @@ name: Release
 on:
   pull_request:
     branches: 
-      - 'changeset-release/**'
+      - 'main'
+    paths:
+      - '**/CHANGELOG.md'
     types:
       - closed
     
