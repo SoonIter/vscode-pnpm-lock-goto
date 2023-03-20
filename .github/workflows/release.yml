@@ -3,7 +3,7 @@ name: Release
 on:
   pull_request:
     branches: 
-      - 'changeset-release/main'
+      - 'changeset-release/**'
     types:
       - closed
     
@@ -29,9 +29,6 @@ jobs:
       with:
         node-version: 16.x
         cache: pnpm
-
-    - name: Setup-ni
-      run: npm i -g @antfu/ni
 
     - name: Install
       run: |
