@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- f8edf12: test auto-release
+- f8edf12: test auto-release pipeline
 
 ## 0.0.1
 
