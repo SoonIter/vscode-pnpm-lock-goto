@@ -1,21 +1,13 @@
-import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import simpleGit from 'simple-git';
-import fse from 'fs-extra';
-const __dirname = fileURLToPath(import.meta.url);
+import { getCurrentVersion } from './getCurrentVersion.js';
 
-const { readJSON } = fse;
-
-async function getCurrentVersion() {
-  console.log(__dirname);
-  const packageJson = await readJSON(join(__dirname, '../../package.json'));
-  console.log(`${packageJson.version}`);
-  return packageJson.version;
+export async function pushTags(currentVersion) {
+  await simpleGit().addTag(`v${currentVersion}`).pushTags();
 }
 
 async function main() {
   const currentVersion = await getCurrentVersion();
-  await simpleGit().addTag(`v${currentVersion}`).pushTags();
+  pushTags(currentVersion);
 }
 
 main();

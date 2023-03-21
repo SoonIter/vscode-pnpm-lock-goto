@@ -34,11 +34,11 @@ jobs:
       - id: get_date
         run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
 
-      - name: Install
+      - name: Install And Publish
         run: |
           pnpm install
           pnpm run publish
-          node ./scripts/pushCurrentVersionTag.js
+          node ./scripts/pushCurrentVersionTag.js >> $GITHUB_OUTPUT
         env:
           VSCE_PAT: ${{ secrets.AZURE_TOKEN }}
 
@@ -47,3 +47,4 @@ jobs:
         with:
           files: ./*.vsix
           body_path: CHANGELOG.md
+          target_commitish: ${{ github.sha }}
