@@ -1,9 +1,9 @@
+# create pr with bumpped version, if merged auto-release
 name: Release-routine
 on:
   push:
     branches:
       - main
-      - '!changset*'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -44,6 +44,6 @@ jobs:
         with:
           version: npx changeset version
           title: release-routine-${{ steps.get_date.outputs.DATE }}
-          commit: release-auto-generated
+          commit: auto-generated-by-ci
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

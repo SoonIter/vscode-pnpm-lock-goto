@@ -1,46 +1,49 @@
+# run when pr from changeset/main is merged to main
 name: Release
-
 on:
   pull_request:
-    branches: 
+    branches:
       - 'main'
     paths:
       - '**/CHANGELOG.md'
     types:
       - closed
-    
 
 jobs:
   if_release_routine_merged:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'changeset/')
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "The PR from ${{ github.head_ref }} was merged"
+      - run: |
+          echo "::notice ::The PR from ${{ github.head_ref }} was merged into main, run the publish pipeline"
 
-    - name: Checkout Repo
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
 
-    - name: Set node16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16.x
-        cache: pnpm
+      - name: Set node16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
 
-    - name: Install
-      run: |
-        pnpm install
-        pnpm run publish
-      env:
-        VSCE_PAT: ${{ secrets.AZURE_TOKEN }}
+      - id: get_date
+        run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
 
-    - name: Create Github Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: ./*.vsix
-        body_path: CHANGELOG.md
+      - name: Install
+        run: |
+          pnpm install
+          pnpm run publish
+          node ./scripts/pushCurrentVersionTag.js
+        env:
+          VSCE_PAT: ${{ secrets.AZURE_TOKEN }}
+
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./*.vsix
+          body_path: CHANGELOG.md
