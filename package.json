@@ -2,7 +2,7 @@
   "publisher": "sooniter",
   "name": "pnpm-lock-goto",
   "displayName": "pnpm-lock-goto",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "packageManager": "pnpm@7.28.0",
   "description": "",
