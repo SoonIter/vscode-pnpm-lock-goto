@@ -4,10 +4,10 @@ on:
   pull_request:
     branches:
       - main
-      - '!changset**'
 
 jobs:
-  tasks:
+  Build__Lint__Test__Typecheck:
+    if: ${{ !(startsWith(github.head_ref, 'release') || startsWith(github.head_ref, 'changeset')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
