@@ -1,11 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-      - '!changset**'
-
   pull_request:
     branches:
       - main
