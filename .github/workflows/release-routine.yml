@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   release:
+    if: ${{ !startsWith(github.head_ref, 'changeset') && !startsWith(github.head_ref, 'release') }}
     name: Release-routine
     runs-on: ubuntu-latest
     steps:

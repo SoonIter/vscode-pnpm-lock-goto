@@ -7,7 +7,7 @@ on:
 
 jobs:
   Build__Lint__Test__Typecheck:
-    if: ${{ !(startsWith(github.head_ref, 'release') || startsWith(github.head_ref, 'changeset')) }}
+    if: ${{ !startsWith(github.head_ref, 'changeset') && !startsWith(github.head_ref, 'release') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

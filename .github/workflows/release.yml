@@ -11,7 +11,7 @@ on:
 
 jobs:
   if_release_routine_merged:
-    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'changeset/')
+    if: ${{ github.event.pull_request.merged == true && (startsWith(github.head_ref, 'changeset') || startsWith(github.head_ref, 'release')) }}
     runs-on: ubuntu-latest
     steps:
       - run: |
