@@ -1,5 +1,11 @@
 # pnpm-lock-goto
 
+## 0.0.4
+
+### Patch Changes
+
+- 8a9208d: test pipeline
+
 ## 0.0.3
 
 ### Patch Changes
