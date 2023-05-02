@@ -1,5 +1,11 @@
 # pnpm-lock-goto
 
+## 0.0.7
+
+### Patch Changes
+
+- ed876aa: test pipeline
+
 ## 0.0.6
 
 ### Patch Changes

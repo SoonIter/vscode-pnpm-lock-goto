@@ -40,7 +40,7 @@ jobs:
         run: |
           pnpm install
           pnpm run publish
-          node ./scripts/pushCurrentVersionTag.js >> $GITHUB_OUTPUT
+          node ./scripts/pushCurrentVersionTag.js
         env:
           VSCE_PAT: ${{ secrets.AZURE_TOKEN }}
 
