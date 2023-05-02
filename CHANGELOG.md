@@ -1,5 +1,11 @@
 # pnpm-lock-goto
 
+## 0.1.2
+
+### Patch Changes
+
+- 473128c: chore(ci): test pipeline
+
 ## 0.1.1
 
 ### Patch Changes
