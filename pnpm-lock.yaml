@@ -3,6 +3,10 @@ lockfileVersion: '6.0'
 importers:
 
   .:
+    dependencies:
+      picocolors:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^0.37.0
@@ -19,12 +23,18 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^17.4.4
         version: 17.4.4
+      '@pnpm/dependency-path':
+        specifier: ^2.1.1
+        version: 2.1.1
       '@pnpm/lockfile-file':
         specifier: ^8.0.2
         version: 8.0.2(@pnpm/logger@5.0.0)
       '@pnpm/lockfile-types':
         specifier: ^4.3.6
         version: 4.3.6
+      '@pnpm/logger':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@pnpm/reviewing.dependencies-hierarchy':
         specifier: ^2.0.4
         version: 2.0.4(@pnpm/logger@5.0.0)
@@ -4694,7 +4704,6 @@ packages:
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
-    dev: true
 
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}

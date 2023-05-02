@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import type { ExtensionContext } from 'vscode';
+import { Lockfile } from './lockfile';
 import { logger } from '~/utils/logger';
 import {
   createAnchorPosition,
@@ -11,7 +12,7 @@ import {
 } from '~/utils/reg';
 
 function activate(context: ExtensionContext) {
-  logger.log('activate');
+  logger.info({ prefix: 'activate', message: 'trigger' });
   // 注册鼠标悬停提示
   context.subscriptions.push(
     vscode.languages.registerHoverProvider('yaml', {
@@ -34,7 +35,7 @@ function provideHover(
   position: vscode.Position,
   token: vscode.CancellationToken,
 ) {
-  logger.log('provideHover');
+  logger.info({ message: 'start', prefix: 'provideHover' });
   const fileName = document.fileName;
 
   if (!isLockfile(fileName)) {
@@ -48,7 +49,9 @@ function provideHover(
   }
 
   const { name, version } = parseDepLine(lineText);
-  const storeName = toStoreName(name, version);
+  const lockfile = Lockfile.getInstance(document);
+
+  const storeName = toStoreName(name, version, lockfile.lockfileVersion === '6.0');
   const hoverRange = new vscode.Range(
     new vscode.Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex),
     new vscode.Position(line.lineNumber, line.range.end.character),
@@ -62,7 +65,7 @@ function provideDefinition(
   position: vscode.Position,
   token: vscode.CancellationToken,
 ) {
-  logger.log('provideDefinition');
+  logger.info({ prefix: 'provideDefinition', message: 'start' });
   const fileName = document.fileName;
   const line = document.lineAt(position.line);
   const lineText = line.text;
@@ -74,7 +77,11 @@ function provideDefinition(
     return;
   }
 
-  return new vscode.Location(document.uri, createAnchorPosition(lineText, document));
+  const definitionPosition = createAnchorPosition(lineText, document);
+  if (!definitionPosition) {
+    return;
+  }
+  return new vscode.Location(document.uri, definitionPosition);
 }
 
 export { activate, deactivate };
