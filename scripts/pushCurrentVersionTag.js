@@ -1,5 +1,17 @@
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 import simpleGit from 'simple-git';
-import { getCurrentVersion } from './getCurrentVersion.js';
+import fse from 'fs-extra';
+
+const __dirname = fileURLToPath(import.meta.url);
+
+const { readJSON } = fse;
+
+export async function getCurrentVersion() {
+  const packageJson = await readJSON(join(__dirname, '../../package.json'));
+  return packageJson.version;
+}
 
 export async function pushTags(currentVersion) {
   await simpleGit().addTag(`v${currentVersion}`).pushTags();
@@ -7,6 +19,8 @@ export async function pushTags(currentVersion) {
 
 async function main() {
   const currentVersion = await getCurrentVersion();
+  console.log(`currentVersion is ${currentVersion}`);
+  execSync(`echo {version}={${currentVersion}} >> $GITHUB_OUTPUT`);
   pushTags(currentVersion);
 }
 
