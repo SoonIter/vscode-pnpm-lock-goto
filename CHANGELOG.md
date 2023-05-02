@@ -1,5 +1,11 @@
 # pnpm-lock-goto
 
+## 0.0.6
+
+### Patch Changes
+
+- 0f62ef8: support lockfile V6
+
 ## 0.0.5
 
 ### Patch Changes
