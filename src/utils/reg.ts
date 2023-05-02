@@ -1,16 +1,20 @@
 import type * as vscode from 'vscode';
+import { exit } from './logger';
 
+export const lineReg = /\s*([\w\-\@\.\^\~\'\"\/]+)\s*:\s*(\S+)\s*/;
 // '@commitlint/cli': ^17.4.4
-const lineReg = /\s*([\w\-\@\.\^\~\'\"\/]+)\s*:\s*(\S+)\s*/;
-
-// semver: 5.7.1
-// '@antfu/eslint-config': 0.37.0_j4766f7ecgqbon3u7zlxn5zszu
-const exactLineReg = /\s*([\w\-\@\.\^\~\'\"\/]+)\s*:\s*([\w@\-_\.'\/]+)/;
-
 export const isDependenciesLine = (text: string): boolean => {
   return lineReg.test(text) && !text.startsWith('dev') && !text.startsWith('hasBin');
 };
 
+export const exactLineReg = /\s*([\w\-\@\.\^\~\'\"\/]+)\s*:\s*([\w@\-_\.'\/]+)/;
+// semver: 5.7.1
+// '@antfu/eslint-config': 0.37.0_j4766f7ecgqbon3u7zlxn5zszu
+/**
+ * @example
+ * isExactDependenciesLine(`semver: 5.7.1`); // true
+ * isExactDependenciesLine(`'@antfu/eslint-config': 0.37.0_j4766f7ecgqbon3u7zlxn5zszu`); // true
+ */
 export const isExactDependenciesLine = (text: string): boolean => {
   return exactLineReg.test(text) && !text.startsWith('dev') && !text.startsWith('hasBin');
 };
@@ -27,8 +31,11 @@ export const isLockfile = (fileName: string): boolean => {
  * @param exactDepsLineText path-key: 4.0.0
  * @returns
  */
-export const parseDepLine = (exactDepsLineText: string): { name: string;version: string } => {
+export const parseDepLine = (exactDepsLineText: string): { name: string; version: string } => {
   let [_, name, version] = lineReg.exec(exactDepsLineText)!;
+  if (!name || !version) {
+    exit('not a right DepLine');
+  }
   name = name.replaceAll('"', '').replaceAll('\'', '');
   return { name, version };
 };
