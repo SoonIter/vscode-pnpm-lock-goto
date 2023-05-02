@@ -3,7 +3,7 @@ name: Release
 on:
   pull_request:
     branches:
-      - 'main'
+      - main
     paths:
       - '**/CHANGELOG.md'
     types:
@@ -14,7 +14,8 @@ jobs:
     if: ${{ github.event.pull_request.merged == true && (startsWith(github.head_ref, 'changeset') || startsWith(github.head_ref, 'release')) }}
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Note branch
+        run: |
           echo "::notice ::The PR from ${{ github.head_ref }} was merged into main, run the publish pipeline"
 
       - name: Checkout Repo
@@ -31,7 +32,7 @@ jobs:
           node-version: 16.x
           cache: pnpm
 
-      - id: get_date
+      - id: Get Date
         run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
 
       - name: Install And Publish

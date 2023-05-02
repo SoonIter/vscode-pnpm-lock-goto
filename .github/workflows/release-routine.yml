@@ -3,7 +3,7 @@ name: Release-routine
 on:
   pull_request:
     branches:
-      - 'main'
+      - main
     types:
       - closed
 
@@ -39,7 +39,7 @@ jobs:
       - name: Install
         run: pnpm install
 
-      - id: get_date 
+      - id: get_date
         run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
 
       - name: Create Release Pull Request
@@ -47,6 +47,6 @@ jobs:
         with:
           version: npx changeset version
           title: release-routine-${{ steps.get_date.outputs.DATE }}
-          commit: "release: ${{ steps.get_date.outputs.DATE }}-auto-generated-by-ci"
+          commit: 'release: ${{ steps.get_date.outputs.DATE }}-auto-generated-by-ci'
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

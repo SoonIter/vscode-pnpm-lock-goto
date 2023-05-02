@@ -1,7 +1,14 @@
 import * as vscode from 'vscode';
 import type { ExtensionContext } from 'vscode';
 import { logger } from '~/utils/logger';
-import { createAnchorPosition, isDependenciesLine, isExactDependenciesLine, isLockfile, parseDepLine, toStoreName } from '~/utils/reg';
+import {
+  createAnchorPosition,
+  isDependenciesLine,
+  isExactDependenciesLine,
+  isLockfile,
+  parseDepLine,
+  toStoreName,
+} from '~/utils/reg';
 
 function activate(context: ExtensionContext) {
   logger.log('activate');
@@ -42,12 +49,12 @@ function provideHover(
 
   const { name, version } = parseDepLine(lineText);
   const storeName = toStoreName(name, version);
-  const hoverRange = new vscode.Range(new vscode.Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex), new vscode.Position(line.lineNumber, line.range.end.character));
-
-  return new vscode.Hover(
-      `${storeName}`,
-      hoverRange,
+  const hoverRange = new vscode.Range(
+    new vscode.Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex),
+    new vscode.Position(line.lineNumber, line.range.end.character),
   );
+
+  return new vscode.Hover(`${storeName}`, hoverRange);
 }
 
 function provideDefinition(
@@ -67,10 +74,7 @@ function provideDefinition(
     return;
   }
 
-  return new vscode.Location(
-    document.uri,
-    createAnchorPosition(lineText, document),
-  );
+  return new vscode.Location(document.uri, createAnchorPosition(lineText, document));
 }
 
 export { activate, deactivate };

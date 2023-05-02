@@ -4,7 +4,7 @@
   "displayName": "pnpm-lock-goto",
   "version": "0.0.5",
   "private": true,
-  "packageManager": "pnpm@7.28.0",
+  "packageManager": "pnpm@8.3.1",
   "description": "",
   "author": "sooniter <sooniter@gmail.com>",
   "license": "MIT",
@@ -31,31 +31,34 @@
     "onLanguage:yaml"
   ],
   "scripts": {
-    "prepare": "simple-git-hooks",
-    "build": "tsup src/index.ts --external vscode",
-    "dev": "nr build --watch",
+    "build": "tsup src/index.ts --external vscode --minify",
+    "changeset": "changeset",
+    "dev": "tsup src/index.ts --external vscode --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "vscode:prepublish": "nr build",
-    "publish": "vsce publish --no-dependencies",
     "pack": "vsce package --no-dependencies",
+    "prepare": "simple-git-hooks",
+    "publish": "vsce publish --no-dependencies",
+    "release": "changeset version && nr publish",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "changeset version && nr publish",
-    "changeset": "changeset"
+    "vscode:prepublish": "nr build"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.0",
     "@antfu/eslint-config": "^0.37.0",
     "@antfu/ni": "^0.20.0",
+    "@changesets/cli": "^2.26.0",
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
+    "@pnpm/lockfile-file": "^8.0.2",
+    "@pnpm/lockfile-types": "^4.3.6",
+    "@pnpm/reviewing.dependencies-hierarchy": "^2.0.4",
     "@types/node": "^18.15.3",
     "@types/vscode": "^1.69.0",
     "eslint": "^8.36.0",
     "esno": "^0.16.3",
     "lint-staged": "^13.2.0",
-    "pnpm": "^7.30.0",
+    "pnpm": "8.3.1",
     "rimraf": "^4.4.0",
     "simple-git-hooks": "^2.8.1",
     "tsup": "^6.7.0",
@@ -69,7 +72,7 @@
     "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,vue,md}": [
+    "*.{js,ts,tsx,md,json}": [
       "eslint --fix"
     ]
   }
