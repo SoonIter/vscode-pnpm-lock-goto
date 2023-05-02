@@ -1,15 +1,15 @@
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import simpleGit from 'simple-git';
 import fse from 'fs-extra';
 
-const __dirname = fileURLToPath(import.meta.url);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const { readJSON } = fse;
 
 export async function getCurrentVersion() {
-  const packageJson = await readJSON(join(__dirname, '../../package.json'));
+  const packageJson = await readJSON(join(__dirname, '../package.json'));
   return packageJson.version;
 }
 

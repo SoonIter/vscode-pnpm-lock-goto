@@ -33,6 +33,7 @@
   "scripts": {
     "build": "node ./scripts/checkBundle.js && tsup src/index.ts --external vscode --minify",
     "changeset": "changeset",
+    "autoChangeset": "node ./scripts/autoCreateChangeset.js",
     "dev": "tsup src/index.ts --external vscode --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -77,7 +78,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/lint-staged",
-    "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS && node ./scripts/autoCreateChangeset.js"
+    "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS"
   },
   "lint-staged": {
     "*.{js,ts,tsx,md,json}": [
