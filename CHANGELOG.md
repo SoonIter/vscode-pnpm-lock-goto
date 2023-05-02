@@ -1,5 +1,11 @@
 # pnpm-lock-goto
 
+## 0.1.1
+
+### Patch Changes
+
+- fb311fc: test pipeline
+
 ## 0.1.0
 
 ### Minor Changes
