@@ -43,6 +43,7 @@ jobs:
           pnpm install
           pnpm run publish
           node ./scripts/pushCurrentVersionTag.js
+          pnpm run pack
         env:
           VSCE_PAT: ${{ secrets.AZURE_TOKEN }}
 
