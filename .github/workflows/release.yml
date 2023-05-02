@@ -32,7 +32,8 @@ jobs:
           node-version: 16.x
           cache: pnpm
 
-      - id: Get Date
+      - name: Get Date
+        id: get_date
         run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
 
       - name: Install And Publish

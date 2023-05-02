@@ -1,11 +1,9 @@
 # create pr with bumpped version, if merged auto-release
 name: Release-routine
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
+  workflow_dispatch:
+  schedule:
+      - cron: "0 10 * * 1"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -15,7 +13,7 @@ permissions:
 
 jobs:
   release:
-    if: ${{ github.event.pull_request.merged == true && !startsWith(github.head_ref, 'changeset') && !startsWith(github.head_ref, 'release') }}
+    if: ${{ !startsWith(github.head_ref, 'changeset') && !startsWith(github.head_ref, 'release') }}
     name: Release-routine
     runs-on: ubuntu-latest
     steps:
