@@ -31,8 +31,8 @@ importers:
         specifier: 8.0.2
         version: 8.0.2(patch_hash=gaut7wmbmqes75fxx5v3xdshkm)(@pnpm/logger@5.0.0)
       '@pnpm/lockfile-types':
-        specifier: ^4.3.6
-        version: 4.3.6
+        specifier: ^5.0.0
+        version: 5.0.0
       '@pnpm/logger':
         specifier: ^5.0.0
         version: 5.0.0
@@ -1001,13 +1001,6 @@ packages:
     dev: true
     patched: true
 
-  /@pnpm/lockfile-types@4.3.6:
-    resolution: {integrity: sha512-5vvdV3tEVOCzzeGv2FXK4590qPUVpZ+5gdqCawFuiNTJavx+4rmmY4aDUjdVXUcKGwqkIBPVKe/SNUBA3A2rtg==}
-    engines: {node: '>=14.6'}
-    dependencies:
-      '@pnpm/types': 8.10.0
-    dev: true
-
   /@pnpm/lockfile-types@5.0.0:
     resolution: {integrity: sha512-2M82hciNNIczVtWmQF3eSXPFVWvGWBvq+vssBkSIP0tZW/izYyvkUf2NN8ktNrB/w0jDCVEzujC6RXiRR9b1bg==}
     engines: {node: '>=16.14'}
@@ -1110,11 +1103,6 @@ packages:
       resolve-link-target: 2.0.0
     transitivePeerDependencies:
       - '@pnpm/logger'
-    dev: true
-
-  /@pnpm/types@8.10.0:
-    resolution: {integrity: sha512-A4pcNNvFJdkMXArEjTCOIYNL2VxD4uBynWZ6cBIELXb5qJ0tUzwKsaSz4J953I0rQFqnsFpUYqaWIquI10W1sw==}
-    engines: {node: '>=14.6'}
     dev: true
 
   /@pnpm/types@9.0.0:
