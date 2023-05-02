@@ -1,5 +1,16 @@
 # pnpm-lock-goto
 
+## 0.1.0
+
+### Minor Changes
+
+- 2dec0c0: feat: yaml block highlight
+
+### Patch Changes
+
+- 4f9fd82: chore: auto create changeset script
+- af4bc5d: fix: move dependencies to devDependencies
+
 ## 0.0.7
 
 ### Patch Changes
