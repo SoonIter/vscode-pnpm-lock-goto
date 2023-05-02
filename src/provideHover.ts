@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
-import { PnpmLockfile } from './lockfile';
 import { refToRelative_v5 } from './lockfile/refToRelative';
+import { PnpmLockfile } from './lockfile';
 import { logger } from '~/logger/logger';
 import {
+  dependencyPath,
   isDependenciesLine,
   isExactDependenciesLine,
   isLockfile,
@@ -35,24 +36,28 @@ async function provideHover(
     return;
   }
 
-  const lockfile = await PnpmLockfile.getInstance(document);
-
-  const relativePath = refToRelative_v5(version, name);
-  if (!relativePath) {
+  const relativePath_v5 = refToRelative_v5(version, name);
+  if (!relativePath_v5) {
     return;
   }
-  console.log(relativePath);
+
+  logger.info({ prefix: 'definition', message: relativePath_v5 });
+
   const hoverRange = new vscode.Range(
     new vscode.Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex),
     new vscode.Position(line.lineNumber, line.range.end.character),
   );
 
-  const projectSnapshot = lockfile.lockfile?.packages?.[relativePath];
-  if (!projectSnapshot) {
+  const lockfile = await PnpmLockfile.getInstance(document);
+  const packageSnapshot = lockfile.lockfile?.packages?.[relativePath_v5];
+  if (!packageSnapshot) {
     return;
   }
+  const relativePath = dependencyPath(name, version, lockfile.lockfileVersion >= 6);
 
-  return new vscode.Hover(`${JSON.stringify(projectSnapshot)}`, hoverRange);
+  const hoverContent = new vscode.MarkdownString(`#### ${relativePath}`);
+
+  return new vscode.Hover(hoverContent, hoverRange);
 }
 
 export { provideHover };

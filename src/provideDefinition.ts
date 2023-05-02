@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { getYamlBlockRange } from './utils/getYamlBlockRange';
 import { logger } from '~/logger/logger';
 import {
   createAnchorPosition,
@@ -31,7 +32,7 @@ async function provideDefinition(
   return [{
     originSelectionRange: new vscode.Range(new vscode.Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex), line.range.end),
     targetUri: document.uri,
-    targetRange: new vscode.Range(new vscode.Position(targetLine.lineNumber, targetLine.firstNonWhitespaceCharacterIndex), targetLine.range.end),
+    targetRange: getYamlBlockRange(targetLine, document),
   }] as vscode.LocationLink[];
 }
 

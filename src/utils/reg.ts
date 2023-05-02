@@ -58,16 +58,15 @@ export const dependencyPath = (name: string, version: string, isLockfileV6: bool
 
 export const createAnchorPosition = (lineText: string, document: vscode.TextDocument) => {
   const { name, version } = parseDepLine(lineText);
+
   const isLockfileV6 = getLockfileVersion(document) >= 6.0;
-  console.log(isLockfileV6);
 
   const relativePath = dependencyPath(name, version, isLockfileV6);
-
-  logger.debug({ relativePath });
 
   if (!relativePath) {
     return;
   }
+  logger.debug({ name, relativePath });
 
-  return document.positionAt(document.getText().indexOf(relativePath));
+  return document.positionAt(document.getText().indexOf(`${relativePath}:`));
 };
