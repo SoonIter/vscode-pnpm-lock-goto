@@ -8,6 +8,7 @@ on:
       - '**/CHANGELOG.md'
     types:
       - closed
+   
 
 jobs:
   if_release_routine_merged:
@@ -37,6 +38,7 @@ jobs:
         run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
 
       - name: Install And Publish
+        id: install_and_publish
         run: |
           pnpm install
           pnpm run publish
@@ -50,3 +52,4 @@ jobs:
           files: ./*.vsix
           body_path: CHANGELOG.md
           target_commitish: ${{ github.sha }}
+          tag_name: ${{ steps.install_and_publish.outputs.tag }}

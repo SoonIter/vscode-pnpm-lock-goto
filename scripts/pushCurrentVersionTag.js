@@ -14,13 +14,16 @@ export async function getCurrentVersion() {
 }
 
 export async function pushTags(currentVersion) {
-  await simpleGit().addTag(`v${currentVersion}`).pushTags();
+  const tagName = `v${currentVersion}`;
+  await simpleGit().addTag(tagName).pushTags();
+
+  execSync(`echo "tag=${tagName}" >> $GITHUB_OUTPUT`, { encoding: 'utf-8', env: process.env, stdio: 'inherit' });
 }
 
 async function main() {
   const currentVersion = await getCurrentVersion();
   console.log(`currentVersion is ${currentVersion}`);
-  execSync(`echo {version}={${currentVersion}} >> $GITHUB_OUTPUT`, { encoding: 'utf-8', env: process.env, stdio: 'inherit' });
+  execSync(`echo "version=${currentVersion}" >> $GITHUB_OUTPUT`, { encoding: 'utf-8', env: process.env, stdio: 'inherit' });
   pushTags(currentVersion);
 }
 
