@@ -51,7 +51,7 @@ function provideHover(
   const { name, version } = parseDepLine(lineText);
   const lockfile = Lockfile.getInstance(document);
 
-  const storeName = toStoreName(name, version, lockfile.lockfileVersion === '6.0');
+  const storeName = toStoreName(name, version, lockfile.lockfileVersion >= 6);
   const hoverRange = new vscode.Range(
     new vscode.Position(line.lineNumber, line.firstNonWhitespaceCharacterIndex),
     new vscode.Position(line.lineNumber, line.range.end.character),
