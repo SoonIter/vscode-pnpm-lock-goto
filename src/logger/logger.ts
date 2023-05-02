@@ -11,7 +11,8 @@ function exit(message: string) {
 streamParser.on('data', (msg: any) => {
   switch (msg.level) {
     case 'error':
-      console.log(red('ERROR'), msg?.name);
+      console.log(msg);
+      console.log(red('ERROR'), msg?.name, msg?.err);
       break;
     case 'debug':
       console.log(gray('debug'), msg?.name, msg);

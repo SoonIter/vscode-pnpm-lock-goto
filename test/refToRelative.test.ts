@@ -9,7 +9,7 @@ describe('refToRelative', () => {
       refToRelative_v5('1.1.1', '@pnpm/logger'),
     ).toMatchInlineSnapshot('"/@pnpm/logger/1.1.1"');
   });
-  it('name: version', () => {
+  it('name: version_v6', () => {
     expect(refToRelative_v6('1.0.0', 'foo')).toMatchInlineSnapshot('"/foo@1.0.0"');
     expect(refToRelative_v6('1.1.1', 'foo')).toMatchInlineSnapshot('"/foo@1.1.1"');
     expect(

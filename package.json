@@ -31,7 +31,7 @@
     "onLanguage:yaml"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --external vscode --minify",
+    "build": "node ./scripts/checkBundle.js && tsup src/index.ts --external vscode --minify",
     "changeset": "changeset",
     "dev": "tsup src/index.ts --external vscode --watch",
     "lint": "eslint .",
@@ -44,9 +44,6 @@
     "typecheck": "tsc --noEmit",
     "vscode:prepublish": "nr build"
   },
-  "dependencies": {
-    "picocolors": "^1.0.0"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.37.0",
     "@antfu/ni": "^0.20.0",
@@ -54,7 +51,7 @@
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@pnpm/dependency-path": "^2.1.1",
-    "@pnpm/lockfile-file": "^8.0.2",
+    "@pnpm/lockfile-file": "8.0.2",
     "@pnpm/lockfile-types": "^4.3.6",
     "@pnpm/logger": "^5.0.0",
     "@pnpm/reviewing.dependencies-hierarchy": "^2.0.4",
@@ -63,6 +60,7 @@
     "eslint": "^8.36.0",
     "esno": "^0.16.3",
     "lint-staged": "^13.2.0",
+    "picocolors": "^1.0.0",
     "pnpm": "8.3.1",
     "rimraf": "^4.4.0",
     "simple-git-hooks": "^2.8.1",
@@ -72,9 +70,14 @@
     "vitest": "^0.29.3",
     "vsce": "^2.10.0"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "@pnpm/lockfile-file@8.0.2": "patches/@pnpm__lockfile-file@8.0.2.patch"
+    }
+  },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/lint-staged",
-    "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS"
+    "commit-msg": "./node_modules/.bin/commitlint -e $HUSKY_GIT_PARAMS && node ./scripts/autoCreateChangeset.js"
   },
   "lint-staged": {
     "*.{js,ts,tsx,md,json}": [

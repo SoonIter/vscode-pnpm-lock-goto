@@ -20,7 +20,7 @@ export async function pushTags(currentVersion) {
 async function main() {
   const currentVersion = await getCurrentVersion();
   console.log(`currentVersion is ${currentVersion}`);
-  execSync(`echo {version}={${currentVersion}} >> $GITHUB_OUTPUT`);
+  execSync(`echo {version}={${currentVersion}} >> $GITHUB_OUTPUT`, { encoding: 'utf-8', env: process.env, stdio: 'inherit' });
   pushTags(currentVersion);
 }
 

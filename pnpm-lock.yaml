@@ -1,12 +1,13 @@
 lockfileVersion: '6.0'
 
+patchedDependencies:
+  '@pnpm/lockfile-file@8.0.2':
+    hash: gaut7wmbmqes75fxx5v3xdshkm
+    path: patches/@pnpm__lockfile-file@8.0.2.patch
+
 importers:
 
   .:
-    dependencies:
-      picocolors:
-        specifier: ^1.0.0
-        version: 1.0.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^0.37.0
@@ -27,8 +28,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       '@pnpm/lockfile-file':
-        specifier: ^8.0.2
-        version: 8.0.2(@pnpm/logger@5.0.0)
+        specifier: 8.0.2
+        version: 8.0.2(patch_hash=gaut7wmbmqes75fxx5v3xdshkm)(@pnpm/logger@5.0.0)
       '@pnpm/lockfile-types':
         specifier: ^4.3.6
         version: 4.3.6
@@ -53,6 +54,9 @@ importers:
       lint-staged:
         specifier: ^13.2.0
         version: 13.2.0
+      picocolors:
+        specifier: ^1.0.0
+        version: 1.0.0
       pnpm:
         specifier: 8.3.1
         version: 8.3.1
@@ -970,7 +974,7 @@ packages:
       execa: /safe-execa@0.1.2
     dev: true
 
-  /@pnpm/lockfile-file@8.0.2(@pnpm/logger@5.0.0):
+  /@pnpm/lockfile-file@8.0.2(patch_hash=gaut7wmbmqes75fxx5v3xdshkm)(@pnpm/logger@5.0.0):
     resolution: {integrity: sha512-V4PA48Q/ZqTu5PkSLX7/H8nCS8gmKUICIDFQRRxpoHF8iv54s01chd9uGwuj1ifO8NQPID0R0zh613/oKSL32A==}
     engines: {node: '>=16.14'}
     peerDependencies:
@@ -995,6 +999,7 @@ packages:
       strip-bom: 4.0.0
       write-file-atomic: 5.0.1
     dev: true
+    patched: true
 
   /@pnpm/lockfile-types@4.3.6:
     resolution: {integrity: sha512-5vvdV3tEVOCzzeGv2FXK4590qPUVpZ+5gdqCawFuiNTJavx+4rmmY4aDUjdVXUcKGwqkIBPVKe/SNUBA3A2rtg==}
@@ -1093,7 +1098,7 @@ packages:
     engines: {node: '>=16.14'}
     dependencies:
       '@pnpm/dependency-path': 2.1.1
-      '@pnpm/lockfile-file': 8.0.2(@pnpm/logger@5.0.0)
+      '@pnpm/lockfile-file': 8.0.2(patch_hash=gaut7wmbmqes75fxx5v3xdshkm)(@pnpm/logger@5.0.0)
       '@pnpm/lockfile-utils': 7.0.1
       '@pnpm/modules-yaml': 12.1.0
       '@pnpm/normalize-registries': 5.0.0
@@ -4704,6 +4709,7 @@ packages:
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+    dev: true
 
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}

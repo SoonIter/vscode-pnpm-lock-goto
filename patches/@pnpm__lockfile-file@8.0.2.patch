@@ -1,0 +1,39 @@
+diff --git a/lib/read.d.ts b/lib/read.d.ts
+index a06b2981bb9e33760e2b9d7ad62ad7be0dd44e92..25de973bb789afecd2d86b21ad3057d9f4231a0c 100644
+--- a/lib/read.d.ts
++++ b/lib/read.d.ts
+@@ -12,6 +12,10 @@ export declare function readWantedLockfileAndAutofixConflicts(pkgPath: string, o
+     lockfile: Lockfile | null;
+     hadConflicts: boolean;
+ }>;
++export declare function readLockRaw(rawContent: string, opts: {
++    wantedVersions?: string[];
++    ignoreIncompatible: boolean;
++}): Promise<Lockfile>;
+ export declare function readWantedLockfile(pkgPath: string, opts: {
+     wantedVersions?: string[];
+     ignoreIncompatible: boolean;
+diff --git a/lib/read.js b/lib/read.js
+index e22ecbfc82ad636ca8f1af7957f8176a9c4a0da2..20187428c4a7b64d13d5f6bb26811c93f235b7f3 100644
+--- a/lib/read.js
++++ b/lib/read.js
+@@ -36,11 +36,18 @@ async function readWantedLockfile(pkgPath, opts) {
+     return (await _readWantedLockfile(pkgPath, opts)).lockfile;
+ }
+ exports.readWantedLockfile = readWantedLockfile;
++
++exports.readLockRaw = async function (rawContent, opts) {
++    return (await _read('', '', {
++        ...opts,
++        rawContent,
++    })).lockfile
++}
+ async function _read(lockfilePath, prefix, // only for logging
+ opts) {
+     let lockfileRawContent;
+     try {
+-        lockfileRawContent = (0, strip_bom_1.default)(await fs_1.promises.readFile(lockfilePath, 'utf8'));
++        lockfileRawContent = opts?.rawContent ?? ((0, strip_bom_1.default)(await fs_1.promises.readFile(lockfilePath, 'utf8')));
+     }
+     catch (err) { // eslint-disable-line
+         if (err.code !== 'ENOENT') {
