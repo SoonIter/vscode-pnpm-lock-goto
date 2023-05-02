@@ -1,27 +1,28 @@
-function createLogLevel(name: string, level: string) {
-  return (...content: unknown[]) => {
-    console.log(`[${name}]${level}:`, ...content);
-  };
-}
+import { logger as createLogger, streamParser } from '@pnpm/logger';
+import { blue, gray, red, yellow } from 'picocolors';
 
-class Logger {
-  name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
-
-  private level(level: string) {
-    return createLogLevel(this.name, level);
-  }
-
-  trace = this.level('trace');
-  log = this.level('log');
-  error = this.level('error');
-}
-const logger = new Logger('pnpm-lock-goto-logger');
+const logger = createLogger('pnpm-lock-goto-logger');
 
 function exit(message: string) {
-  logger.error(message);
+  logger.error(new Error(message));
   throw new Error(message);
 }
+
+streamParser.on('data', (msg: any) => {
+  switch (msg.level) {
+    case 'error':
+      console.log(red('ERROR'), msg?.name);
+      break;
+    case 'debug':
+      console.log(gray('debug'), msg?.name, msg);
+      break;
+    case 'warn':
+      console.log(yellow('warn'), msg?.name);
+      break;
+    case 'info':
+      console.log(blue('info'), msg?.name, msg?.prefix, msg?.message);
+      break;
+  }
+});
+
 export { logger, exit };

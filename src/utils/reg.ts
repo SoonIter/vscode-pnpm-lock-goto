@@ -1,4 +1,7 @@
 import type * as vscode from 'vscode';
+import { logger } from '@pnpm/logger';
+import { refToRelative_v5, refToRelative_v6 } from '../lockfile/refToRelative';
+import { Lockfile } from '../lockfile';
 import { exit } from './logger';
 
 export const lineReg = /\s*([\w\-\@\.\^\~\'\"\/]+)\s*:\s*(\S+)\s*/;
@@ -36,7 +39,7 @@ export const parseDepLine = (exactDepsLineText: string): { name: string; version
   if (!name || !version) {
     exit('not a right DepLine');
   }
-  name = name.replaceAll('"', '').replaceAll('\'', '');
+  name = name.replaceAll('"', '').replaceAll('\'', '').replaceAll(' ', '');
   return { name, version };
 };
 
@@ -44,16 +47,27 @@ export const parseDepLine = (exactDepsLineText: string): { name: string; version
  *
  * @param name normalize-path
  * @param version 3.0.0
- * @returns /normalize-path/3.0.0:
+ * @returns
+ * /normalize-path/3.0.0:
+ * /normalize-path/@3.0.0:
  */
-export const toStoreName = (name: string, version: string) => {
-  return `/${name}/${version}`.replaceAll(' ', '');
+export const toStoreName = (name: string, version: string, isLockfileV6: boolean) => {
+  return isLockfileV6 ? refToRelative_v6(version, name) : refToRelative_v5(version, name);
 };
 
 export const createAnchorPosition = (lineText: string, document: vscode.TextDocument) => {
   const { name, version } = parseDepLine(lineText);
+  const lockfile = Lockfile.getInstance(document);
+  const isLockfileV6 = lockfile.lockfileVersion >= 6.0;
+  console.log(isLockfileV6);
 
-  const storeName = toStoreName(name, version);
+  const storeName = toStoreName(name, version, isLockfileV6);
+
+  logger.debug({ storeName });
+
+  if (!storeName) {
+    return;
+  }
 
   return document.positionAt(document.getText().indexOf(storeName));
 };

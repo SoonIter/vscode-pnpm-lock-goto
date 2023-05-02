@@ -44,14 +44,19 @@
     "typecheck": "tsc --noEmit",
     "vscode:prepublish": "nr build"
   },
+  "dependencies": {
+    "picocolors": "^1.0.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.37.0",
     "@antfu/ni": "^0.20.0",
     "@changesets/cli": "^2.26.0",
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
+    "@pnpm/dependency-path": "^2.1.1",
     "@pnpm/lockfile-file": "^8.0.2",
     "@pnpm/lockfile-types": "^4.3.6",
+    "@pnpm/logger": "^5.0.0",
     "@pnpm/reviewing.dependencies-hierarchy": "^2.0.4",
     "@types/node": "^18.15.3",
     "@types/vscode": "^1.69.0",
