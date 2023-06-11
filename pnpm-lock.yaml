@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 patchedDependencies:
   '@pnpm/lockfile-file@8.0.2':
     hash: gaut7wmbmqes75fxx5v3xdshkm
@@ -58,8 +62,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       pnpm:
-        specifier: 8.5.1
-        version: 8.5.1
+        specifier: 8.6.2
+        version: 8.6.2
       rimraf:
         specifier: ^5.0.0
         version: 5.0.0
@@ -4784,8 +4788,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm@8.5.1:
-    resolution: {integrity: sha512-W6elL7Nww0a/MCICkzpkbxW6f99TQuX4DuJoDjWp39X08PKDkEpg4cgj3d6EtgYADcdQWl/eM8NdlLJVE3RgpA==}
+  /pnpm@8.6.2:
+    resolution: {integrity: sha512-Dmgwe+T34Xr6UYaTLXSphPS7ok4h2EPkaHQEH6j7USoAk21CzueAdD1nQLkWJwDnZkJucho0LbKntJ+9B5xlUQ==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
