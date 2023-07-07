@@ -32,8 +32,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       '@pnpm/lockfile-file':
-        specifier: 8.0.2
-        version: 8.0.2(patch_hash=gaut7wmbmqes75fxx5v3xdshkm)(@pnpm/logger@5.0.0)
+        specifier: 8.1.1
+        version: 8.1.1(@pnpm/logger@5.0.0)
       '@pnpm/lockfile-types':
         specifier: ^5.0.0
         version: 5.0.0
@@ -1161,6 +1161,11 @@ packages:
     engines: {node: '>=16.14'}
     dev: true
 
+  /@pnpm/constants@7.1.1:
+    resolution: {integrity: sha512-31pZqMtjwV+Vaq7MaPrT1EoDFSYwye3dp6BiHIGRJmVThCQwySRKM7hCvqqI94epNkqFAAYoWrNynWoRYosGdw==}
+    engines: {node: '>=16.14'}
+    dev: true
+
   /@pnpm/crypto.base32-hash@2.0.0:
     resolution: {integrity: sha512-3ttOeHBpmWRbgJrpDQ8Nwd3W8s8iuiP5YZM0JRyKWaMtX8lu9d7/AKyxPmhYsMJuN+q/1dwHa7QFeDZJ53b0oA==}
     engines: {node: '>=16.14'}
@@ -1178,11 +1183,28 @@ packages:
       semver: 7.5.0
     dev: true
 
+  /@pnpm/dependency-path@2.1.2:
+    resolution: {integrity: sha512-BXEMdGHZG2y8z7hZAVn+r0z+IdszFZbVPpAp3xyDH3gDN30A4HCVhhCUUf0mthqQZsT131jK4HW82EUwEiW01A==}
+    engines: {node: '>=16.14'}
+    dependencies:
+      '@pnpm/crypto.base32-hash': 2.0.0
+      '@pnpm/types': 9.1.0
+      encode-registry: 3.0.0
+      semver: 7.5.3
+    dev: true
+
   /@pnpm/error@5.0.0:
     resolution: {integrity: sha512-8Bezq6YSSorPyaiQIr3lWF7hTIuatBTPWVCO7rbgJAGw4pq6t3DmLoN2K3EznVHMBIaqEBmkfB1lkKvXaJIVbw==}
     engines: {node: '>=16.14'}
     dependencies:
       '@pnpm/constants': 7.0.0
+    dev: true
+
+  /@pnpm/error@5.0.2:
+    resolution: {integrity: sha512-0TEm+tWNYm+9uh6DSKyRbv8pv/6b4NL0PastLvMxIoqZbBZ5Zj1cYi332R9xsSUi31ZOsu2wpgn/bC7DA9hrjg==}
+    engines: {node: '>=16.14'}
+    dependencies:
+      '@pnpm/constants': 7.1.1
     dev: true
 
   /@pnpm/git-utils@1.0.0:
@@ -1212,18 +1234,51 @@ packages:
       js-yaml: /@zkochan/js-yaml@0.0.6
       normalize-path: 3.0.0
       ramda: /@pnpm/ramda@0.28.1
-      semver: 7.5.0
+      semver: 7.5.3
       sort-keys: 4.2.0
       strip-bom: 4.0.0
       write-file-atomic: 5.0.1
     dev: true
     patched: true
 
+  /@pnpm/lockfile-file@8.1.1(@pnpm/logger@5.0.0):
+    resolution: {integrity: sha512-voot73D3aQ9Mcegco+m+yvr3WqM3IHhUMQWCO2ggm6JNfwnQ6rSXzCytomM4W29Nh/Y1A6HemxtS/K7nImu/TA==}
+    engines: {node: '>=16.14'}
+    peerDependencies:
+      '@pnpm/logger': ^5.0.0
+    dependencies:
+      '@pnpm/constants': 7.1.1
+      '@pnpm/dependency-path': 2.1.2
+      '@pnpm/error': 5.0.2
+      '@pnpm/git-utils': 1.0.0
+      '@pnpm/lockfile-types': 5.1.0
+      '@pnpm/logger': 5.0.0
+      '@pnpm/merge-lockfile-changes': 5.0.2
+      '@pnpm/types': 9.1.0
+      '@pnpm/util.lex-comparator': 1.0.0
+      '@zkochan/rimraf': 2.1.2
+      comver-to-semver: 1.0.0
+      js-yaml: /@zkochan/js-yaml@0.0.6
+      normalize-path: 3.0.0
+      ramda: /@pnpm/ramda@0.28.1
+      semver: 7.5.3
+      sort-keys: 4.2.0
+      strip-bom: 4.0.0
+      write-file-atomic: 5.0.1
+    dev: true
+
   /@pnpm/lockfile-types@5.0.0:
     resolution: {integrity: sha512-2M82hciNNIczVtWmQF3eSXPFVWvGWBvq+vssBkSIP0tZW/izYyvkUf2NN8ktNrB/w0jDCVEzujC6RXiRR9b1bg==}
     engines: {node: '>=16.14'}
     dependencies:
       '@pnpm/types': 9.0.0
+    dev: true
+
+  /@pnpm/lockfile-types@5.1.0:
+    resolution: {integrity: sha512-14eYp9iOdJ7SyOIVXomXhbVnc14DEhzMLS3eKqxYxi9LkANUfxx1/pwRiRY/lTiP9RFS+OkIcTm2QiLsmNEctw==}
+    engines: {node: '>=16.14'}
+    dependencies:
+      '@pnpm/types': 9.1.0
     dev: true
 
   /@pnpm/lockfile-utils@7.0.1:
@@ -1253,7 +1308,17 @@ packages:
       '@pnpm/lockfile-types': 5.0.0
       comver-to-semver: 1.0.0
       ramda: /@pnpm/ramda@0.28.1
-      semver: 7.5.0
+      semver: 7.5.3
+    dev: true
+
+  /@pnpm/merge-lockfile-changes@5.0.2:
+    resolution: {integrity: sha512-cswnzLUxumc1MzZp7ZxEiyV9LvEne4h2AtvSwtjdx8BU/+vbj/kjvBueqPw1t+QJl/lual9Kmem0hQaL8v57wQ==}
+    engines: {node: '>=16.14'}
+    dependencies:
+      '@pnpm/lockfile-types': 5.1.0
+      comver-to-semver: 1.0.0
+      ramda: /@pnpm/ramda@0.28.1
+      semver: 7.5.3
     dev: true
 
   /@pnpm/modules-yaml@12.1.0:
@@ -1325,6 +1390,11 @@ packages:
 
   /@pnpm/types@9.0.0:
     resolution: {integrity: sha512-+nNqpNvqb1u3WW/cHDo7tGjqJBWWe4GAHEdELrz4QMQwGAtG/1GF6NMc0cewdwgU2k67CI3JHGu4quZJnMEUJg==}
+    engines: {node: '>=16.14'}
+    dev: true
+
+  /@pnpm/types@9.1.0:
+    resolution: {integrity: sha512-MMPDMLOY17bfNhLhR9Qmq6/2keoocnR5DWXZfZDC4dKXugrMsE1jB6RnuU8swJIo4zyCsMT/iVSAtl/XK+9Z+A==}
     engines: {node: '>=16.14'}
     dev: true
 
@@ -4627,7 +4697,7 @@ packages:
     resolution: {integrity: sha512-tzua9qWWi7iW4I42vUPKM+SfaF0vQSLAm4yO5J83mSwB7GeoWrDKC/K+8YCnYNwqP5duwazbw2X9l4m8SC2cUw==}
     engines: {node: '>=10'}
     dependencies:
-      semver: 7.5.0
+      semver: 7.5.3
     dev: true
 
   /node-addon-api@4.3.0:
@@ -4649,7 +4719,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.11.0
-      semver: 7.5.0
+      semver: 7.5.3
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -4659,7 +4729,7 @@ packages:
     dependencies:
       hosted-git-info: 6.1.1
       is-core-module: 2.11.0
-      semver: 7.5.0
+      semver: 7.5.3
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -5406,6 +5476,14 @@ packages:
 
   /semver@7.5.0:
     resolution: {integrity: sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      lru-cache: 6.0.0
+    dev: true
+
+  /semver@7.5.3:
+    resolution: {integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -6434,7 +6512,7 @@ packages:
     dev: true
 
   /wrappy@1.0.2:
-    resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
+    resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
 
   /write-file-atomic@5.0.1:
