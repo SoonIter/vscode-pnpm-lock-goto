@@ -56,7 +56,7 @@
     "@pnpm/lockfile-types": "^5.0.0",
     "@pnpm/logger": "^5.0.0",
     "@pnpm/reviewing.dependencies-hierarchy": "^2.0.4",
-    "@types/node": "^18.15.3",
+    "@types/node": "^20.0.0",
     "@types/vscode": "^1.69.0",
     "eslint": "^8.36.0",
     "esno": "^0.16.3",
